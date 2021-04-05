@@ -1,7 +1,7 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/id2323">ID</router-link>
   </div>
   <router-view/>
 </template>
@@ -16,7 +16,12 @@
 }
 
 #nav {
-  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background: url(./assets/parket.jpg);
+  margin-bottom: 1rem;
 }
 
 #nav a {
@@ -30,5 +35,6 @@
 body{
   background: url(./assets/paper.jpg);
   background-size: cover;
+  margin: 0;
 }
 </style>

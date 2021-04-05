@@ -2,7 +2,7 @@
   <div class="home">
     <div class="character">
       <h2 class="name">Лукашевич Андрей Анатольевич</h2>
-      <router-link to="/about" v-if="true" class="lvl">
+      <router-link to="/id3324/up" v-if="true" class="lvl">
         <span>Новый уроень</span>
       </router-link>
       <ul class="list">
@@ -76,6 +76,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  margin-left: 1rem;
 }
 .photo{
   width: 50%;
@@ -129,6 +130,10 @@ export default defineComponent({
   justify-content: center;
   align-items: center;
 }
+.buttons{
+  margin-left: 1rem;
+  text-align: left;
+}
 .tab-button{
   background-color: rgb(141, 141, 141);
   color: rgb(255, 248, 22);
@@ -136,11 +141,19 @@ export default defineComponent({
   height: 30px;
   border: 3px rgb(218, 218, 218) solid;
   outline: none;
-  margin: 5px;
+  margin: 0 5px 10px 0;
+  cursor: pointer;
+}
+.tab-button:hover,.lvl:hover{
+  background-color: rgb(109, 109, 109);
 }
 .activeTab{
   background-color: rgb(65, 65, 65);
   color: rgb(255, 248, 22);
   border: 3px rgb(239, 253, 33) solid;
+}
+.dynamic-component{
+  margin: 0 1rem;
+  flex-grow: 1;
 }
 </style>

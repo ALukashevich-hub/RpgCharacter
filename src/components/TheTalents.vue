@@ -1,11 +1,12 @@
 <template>
   <div class="wrapTalents">
-    <Talent talentName="javascript"/>
-    <Talent talentName="typescript"/>
-    <Talent talentName="C++"/>
-    <Talent talentName="C#"/>
-    <Talent talentName="Docker"/>
-    <Talent talentName="Python"/>
+    <Talent
+      v-for="(talent, index) in talents"
+      :key="index"
+      :talentName="talent.name"
+      :talentDescription="talent.description"
+      :talentImg="talent.img"
+      />
   </div>
 </template>
 
@@ -18,6 +19,25 @@ export default defineComponent({
   components: {
     Talent,
   },
+  data() {
+    return {
+      talents: [{
+        img: 'laziness.jpg',
+        name: 'Лень',
+        description: 'Лень - двигатель прогресса!',
+      },
+      {
+        img: 'shot.png',
+        name: 'Мастер стрелок',
+        description: 'Попадаю кусочком сахара в стакан с 20 метров',
+      },
+      {
+        img: 'logo.png',
+        name: 'Vue',
+        description: 'Кручу этот Vue как захочу',
+      }],
+    };
+  },
 });
 </script>
 
@@ -26,7 +46,6 @@ export default defineComponent({
   display: flex;
   flex-flow: wrap;
   flex-shrink: 1;
-  justify-content: center;
   /* width: 50%; */
 }
 </style>

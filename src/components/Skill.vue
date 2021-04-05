@@ -2,25 +2,32 @@
   <div class="skill">
     <h2 class="skillName">{{ skillName }}</h2>
     <div class="skillValue">
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="block"></div>
+      <SkillPoint
+        v-for="index in 10"
+        :key="index"
+        :isActive="skillValue >= index ? true : false"
+        :PointValue="skillValue"
+      />
     </div>
-    <p class="skillDescription">
-      Описаниеsdfsdddddddddddddddddddddddfsdfsdffdgfdgdfgfdgfdgfdg
+    <p lang="ru" class="skillDescription">
+      {{skillDescription}}
     </p>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import SkillPoint from '@/components/SkillPoint.vue';
 
 export default defineComponent({
   name: 'Skill',
+  components: {
+    SkillPoint,
+  },
   props: {
     skillName: String,
+    skillDescription: String,
+    skillValue: Number,
   },
 });
 </script>
@@ -45,13 +52,9 @@ export default defineComponent({
 }
 .skillDescription{
   margin: 0 1rem 1rem 1rem;
-  word-break: break-all;
-}
-.block{
-  width: 3rem;
-  height: 1rem;
-  background-color: green;
-  border: solid 1px black;
-  border-radius: 10px;
+  /* word-break: break-all; */
+  hyphens: auto;
+  text-align: left;
+  align-self: flex-start;
 }
 </style>
