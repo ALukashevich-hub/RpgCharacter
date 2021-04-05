@@ -12,7 +12,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000000c9;
 }
 
 #nav {
@@ -26,5 +26,9 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+body{
+  background: url(./assets/paper.jpg);
+  background-size: cover;
 }
 </style>
