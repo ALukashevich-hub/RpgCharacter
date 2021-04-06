@@ -8,19 +8,19 @@
       <ul class="list">
         <li>Опыт</li>
         <li>Уровень 24</li>
-        <li>200/365</li>
+        <li>{{currentExp}}/{{highExp}}</li>
       </ul>
-      <progress class="progress" max="365" value="200"></progress>
+      <progress class="progress" :max="highExp" :value="currentExp"></progress>
       <div class="wrap">
         <img class="photo" alt="photo" src="../assets/test2.jpg">
         <div class="specifications">
-          <Characteristic name="СИЛ" :value="10" modifier="0" placeholder="сила"/>
-          <Characteristic name="ЛОВ" :value="16" modifier="+3" placeholder="ловкость"/>
-          <Characteristic name="ВЫН" :value="12" modifier="+1" placeholder="выносливость"/>
-          <Characteristic name="ИНТ" :value="18" modifier="+4" placeholder="интелект"/>
-          <Characteristic name="МДР" :value="12" modifier="+1" placeholder="мудрость"/>
-          <Characteristic name="ХАР" :value="10" modifier="0" placeholder="харизма"/>
-          <Characteristic name="УДЧ" :value="14" modifier="+2" placeholder="удача"/>
+          <Characteristic name="СИЛ" :value="strength.value" placeholder="сила"/>
+          <Characteristic name="ЛОВ" :value="dexterity.value" placeholder="ловкость"/>
+          <Characteristic name="ВЫН" :value="vitality.value" placeholder="выносливость"/>
+          <Characteristic name="ИНТ" :value="intelligence.value" placeholder="интеллект"/>
+          <Characteristic name="МДР" :value="mind.value" placeholder="мудрость"/>
+          <Characteristic name="ХАР" :value="charisma.value" placeholder="харизма"/>
+          <Characteristic name="УДЧ" :value="luck.value" placeholder="удача"/>
         </div>
       </div>
     </div>
@@ -58,7 +58,56 @@ export default defineComponent({
       currentTab: 'TheSkills',
       tabs: ['TheSkills', 'TheTalents'],
       nameTabs: ['Навыки', 'Таланты'],
+      strength: {
+        value: 10,
+      },
+      dexterity: {
+        value: 16,
+      },
+      vitality: {
+        value: 8,
+      },
+      intelligence: {
+        value: 16,
+      },
+      mind: {
+        value: 13,
+      },
+      charisma: {
+        value: 11,
+      },
+      luck: {
+        value: 15,
+      },
+      birthday: new Date(1996, 6, 25),
+      nowMinutes: 0,
+      lvl: 0,
+      highExp: 0,
+      currentExp: 0,
     };
+  },
+  computed: {
+    lvlUp() {
+      return 0;
+    },
+  },
+  mounted() {
+    const birthdayMonth = this.birthday.getMonth();
+    const birthdayDay = this.birthday.getDay();
+    const nowYear = new Date().getFullYear();
+    const pastYearMin = Date.UTC(nowYear - 1, birthdayMonth, birthdayDay) / (1000 * 60);
+    const nowYearMin = Date.UTC(nowYear, birthdayMonth, birthdayDay) / (1000 * 60);
+    this.updateMinutes();
+    setInterval(this.updateMinutes.bind(this), 1000);
+    this.highExp = nowYearMin - pastYearMin;
+    this.currentExp = Math.round(this.nowMinutes - pastYearMin);
+    // this.lvl = (Math.round((this.now / (1000 * 60 * 60 * 24)))
+    //   - Math.round((this.birthday / (1000 * 60 * 60 * 24)))) / 365;
+  },
+  methods: {
+    updateMinutes() {
+      this.nowMinutes = Math.round(Date.now() / (1000 * 60));
+    },
   },
 });
 </script>
@@ -79,10 +128,11 @@ export default defineComponent({
   margin-left: 1rem;
 }
 .photo{
-  width: 50%;
+  /* width: 50%; */
   object-fit: cover;
   border-width: 10px;
   border-style: ridge;
+  flex-shrink: 0;
 }
 .list{
   list-style-type: none;
@@ -109,8 +159,9 @@ export default defineComponent({
   flex-direction: column;
   align-items: flex-end;
   margin: 1rem;
-  /* justify-content: space-around; */
-  width: 50%;
+  /* justify-content: space-around;
+  width: 50%; */
+  flex-grow: 1;
 }
 .lvl{
   display: flex;

@@ -4,11 +4,13 @@
       <p class="name">{{name}}</p>
       <p class="placeholder">{{placeholder}}</p>
     </div>
-    <div class="square">
+    <div class="square"
+      :class="{downgrade: isDowngrade, increase: isIncrease}">
       <p class="value">{{value}}</p>
     </div>
-    <div class="square">
-      <p class="modifier">{{modifier}}</p>
+    <div class="squareTwo"
+      :class="{downgrade: isDowngrade, increase: isIncrease}">
+      <p class="modifier">{{getModifier}}</p>
     </div>
   </div>
 </template>
@@ -21,8 +23,31 @@ export default defineComponent({
   props: {
     name: String,
     value: Number,
-    modifier: String,
     placeholder: String,
+  },
+  data() {
+    return {
+      modifierValue: this.value,
+    };
+  },
+  computed: {
+    updateModifier(): number {
+      const normalValue = 10;
+      const divider = 2;
+      if (this.value !== undefined) {
+        return Math.floor((this.value - normalValue) / divider);
+      }
+      return 0;
+    },
+    getModifier(): string {
+      return this.updateModifier > 0 ? `+${this.updateModifier}` : `${this.updateModifier}`;
+    },
+    isDowngrade(): boolean {
+      return this.updateModifier < 0;
+    },
+    isIncrease(): boolean {
+      return this.updateModifier > 0;
+    },
   },
 });
 </script>
@@ -47,12 +72,21 @@ export default defineComponent({
   width: 50%;
   text-align: right;
 }
-.square{
-  background-color: #0080007a;
+.square, .squareTwo{
+  background-color: #7979797a;
   height: 2rem;
   width: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.squareTwo{
+  width: 2.5rem;
+}
+.downgrade{
+  background-color: #ff1c1c7a;
+}
+.increase{
+  background-color: #4bff1e7a;
 }
 </style>
