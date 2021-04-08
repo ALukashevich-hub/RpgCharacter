@@ -2,13 +2,13 @@
   <div class="home">
     <div class="character">
       <h2 class="name">Лукашевич Андрей Анатольевич</h2>
-      <router-link to="/id3324/up" v-if="true" class="lvl">
+      <router-link to="/id3324/up" v-if="lvlUp" class="lvl">
         <span>Новый уроень</span>
       </router-link>
       <ul class="list">
         <li>Опыт</li>
-        <li>Уровень 24</li>
-        <li>{{currentExp}}/{{highExp}}</li>
+        <li>Уровень {{lvl}}</li>
+        <li>{{currentExp}} / {{highExp}}</li>
       </ul>
       <progress class="progress" :max="highExp" :value="currentExp"></progress>
       <div class="wrap">
@@ -84,29 +84,36 @@ export default defineComponent({
       lvl: 0,
       highExp: 0,
       currentExp: 0,
+      storedLvl: 24,
     };
   },
   computed: {
     lvlUp() {
-      return 0;
+      if (this.lvl > this.storedLvl) {
+        return true;
+      }
+      return false;
     },
   },
   mounted() {
-    const birthdayMonth = this.birthday.getMonth();
-    const birthdayDay = this.birthday.getDay();
-    const nowYear = new Date().getFullYear();
-    const pastYearMin = Date.UTC(nowYear - 1, birthdayMonth, birthdayDay) / (1000 * 60);
-    const nowYearMin = Date.UTC(nowYear, birthdayMonth, birthdayDay) / (1000 * 60);
-    this.updateMinutes();
-    setInterval(this.updateMinutes.bind(this), 1000);
-    this.highExp = nowYearMin - pastYearMin;
-    this.currentExp = Math.round(this.nowMinutes - pastYearMin);
-    // this.lvl = (Math.round((this.now / (1000 * 60 * 60 * 24)))
-    //   - Math.round((this.birthday / (1000 * 60 * 60 * 24)))) / 365;
+    const minutesOnYear = 525600;
+    this.highExp = minutesOnYear;
+    const nowDate = new Date();
+    this.lvl = Math.floor((nowDate.getTime() - this.birthday.getTime())
+     / (1000 * 60 * 60 * 24 * 365.25));
+    this.updateExp();
+    setInterval(this.updateExp.bind(this), 60000);
   },
   methods: {
-    updateMinutes() {
-      this.nowMinutes = Math.round(Date.now() / (1000 * 60));
+    updateExp() {
+      const nowDate = new Date();
+      const birthdayMonth = this.birthday.getMonth();
+      const birthdayDay = this.birthday.getDay();
+      const nowYear = nowDate.getFullYear();
+      const pastYearMinutes = Math.round(new Date(nowYear - 1, birthdayMonth, birthdayDay).getTime()
+       / (1000 * 60));
+      this.nowMinutes = Math.round(nowDate.getTime() / (1000 * 60));
+      this.currentExp = Math.round(this.nowMinutes - pastYearMinutes);
     },
   },
 });
@@ -140,7 +147,7 @@ export default defineComponent({
   justify-content: space-between;
   padding: 0;
   margin: 1rem 1rem 0 1rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 .progress{
   width: 100%;

@@ -37,8 +37,43 @@ export default defineComponent({
         description: 'использую Any вместо других типов, а что?',
       },
       {
+        value: 4,
+        name: 'Vue',
+        description: 'return 0;',
+      },
+      {
         value: 1,
-        name: 'C++',
+        name: 'React',
+        description: 'return 0;',
+      },
+      {
+        value: 3,
+        name: 'Docker',
+        description: 'return 0;',
+      },
+      {
+        value: 4,
+        name: 'HTML',
+        description: 'return 0;',
+      },
+      {
+        value: 4,
+        name: 'CSS',
+        description: 'return 0;',
+      },
+      {
+        value: 3,
+        name: 'Git',
+        description: 'return 0;',
+      },
+      {
+        value: 1,
+        name: 'Node js',
+        description: 'return 0;',
+      },
+      {
+        value: 1,
+        name: 'MongoDB',
         description: 'return 0;',
       }] as ISkills[],
     };
