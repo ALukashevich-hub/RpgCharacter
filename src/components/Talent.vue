@@ -13,6 +13,7 @@
 <script lang="ts">
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
+import store from '@/store';
 import { defineComponent } from 'vue';
 
 export default defineComponent({

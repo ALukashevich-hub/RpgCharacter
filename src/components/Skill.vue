@@ -16,21 +16,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-import { useStore } from 'vuex';
+import { defineComponent } from 'vue';
 import SkillPoint from '@/components/SkillPoint.vue';
 
 export default defineComponent({
   name: 'Skill',
   components: {
     SkillPoint,
-  },
-  setup() {
-    const store = useStore();
-    store.dispatch('getTestApi');
-    return {
-      testApi: computed(() => store.state.testApi),
-    };
   },
   props: {
     skillName: String,

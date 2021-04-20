@@ -1,7 +1,12 @@
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/id2323">ID</router-link>
+    <router-link to="/users/607d01adcc451719ccfc8e2e">ID</router-link> |
+    <router-link to="/users/alukashevich">alukashevich</router-link> |
+    <router-link to="/users/alukashevich/up">UP</router-link> |
+    <router-link to="/users/stepan">stepan</router-link> |
+    <router-link to="/users/stepan/up">UP2</router-link> |
+    <router-link to="/test">Test</router-link>
   </div>
   <router-view/>
 </template>

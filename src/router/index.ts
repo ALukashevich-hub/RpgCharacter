@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import Home from '../views/Home.vue';
+import NotFound from '../views/NotFound.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -8,17 +9,29 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
   },
   {
-    path: '/:id(id[0-9]{4})',
-    name: 'Id',
+    path: '/test',
+    name: 'Test',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Id.vue'),
+    component: () => import(/* webpackChunkName: "test" */ '../views/Test.vue'),
   },
   {
-    path: '/:id(id[0-9]{4})/up',
+    path: '/users/:id',
+    name: 'Users',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "id" */ '../views/Users.vue'),
+  },
+  {
+    path: '/users/:id/up',
     name: 'Up',
     component: () => import(/* webpackChunkName: "up" */ '../views/Up.vue'),
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound,
   },
 ];
 
