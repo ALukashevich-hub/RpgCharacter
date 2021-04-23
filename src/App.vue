@@ -1,15 +1,19 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/users/607d01adcc451719ccfc8e2e">ID</router-link> |
-    <router-link to="/users/alukashevich">alukashevich</router-link> |
-    <router-link to="/users/alukashevich/up">UP</router-link> |
-    <router-link to="/users/stepan">stepan</router-link> |
-    <router-link to="/users/stepan/up">UP2</router-link> |
-    <router-link to="/test">Test</router-link>
-  </div>
+  <TheHeader/>
   <router-view/>
 </template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+import TheHeader from '@/components/TheHeader.vue';
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    TheHeader,
+  },
+});
+</script>
 
 <style>
 #app {
@@ -41,5 +45,6 @@ body{
   background: url(./assets/paper.jpg);
   background-size: cover;
   margin: 0;
+  box-sizing: border-box;
 }
 </style>

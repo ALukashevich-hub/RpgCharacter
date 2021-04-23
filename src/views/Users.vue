@@ -187,7 +187,6 @@ export default defineComponent({
   align-self: center;
   text-align: center;
   border-radius: 10px;
-  box-sizing: border-box;
   border: 3px rgb(218, 218, 218) solid;
   box-shadow: 0 0 20px 5px rgb(218, 218, 218);
   outline: none;
